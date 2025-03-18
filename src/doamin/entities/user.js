@@ -3,19 +3,22 @@
 const bcrypt = require('bcrypt');
 
 class User {
-    constructor({ firstName, lastName, emailId, password, photoUrl, skills, age, about, gender,userId,isPremium,memberShipType}) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    constructor({ name, emailId, password, photoUrl,  about, gender,userId,isPremium,memberShipType,town,pincode,dob}) {
+        this.name = name;
         this.emailId = emailId;
         this.password = password;
-        this.photoUrl = photoUrl;
-        this.skills = skills;
-        this.age = age;
+        this.photoUrl = photoUrl || []; // Ensure photoUrl is an array
         this.about = about;
         this.gender = gender;
         this.userId = userId;
         this.isPremium=isPremium;
-        this.memberShipType=memberShipType
+        this.memberShipType=memberShipType,
+        this.town = town;
+        this.pincode = pincode;
+        this.dob = dob;
+
+
+
     } 
 
     async hashPassword() {

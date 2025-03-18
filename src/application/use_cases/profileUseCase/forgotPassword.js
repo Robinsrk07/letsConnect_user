@@ -20,16 +20,18 @@ class ForgotPassword {
 
             // Create a User object
             const user = new User({
-                firstName: userData[0].firstName,
-                lastName: userData[0].lastName,
-                emailId: userData[0].emailId,
-                password: userData[0].password,
-                photoUrl: userData[0].photoUrl,
-                skills: userData[0].skills,
-                age: userData[0].age,
-                about: userData[0].about,
-                gender: userData[0].gender,
-                userId: userData[0].userId
+                    name: userData[0].name,
+                    emailId: userData[0].emailId,
+                    photoUrl: userData[0].photoUrl,
+                    about: userData[0].about,
+                    password:userData[0].password,
+                    gender: userData[0].gender,
+                    isPremium: userData[0].isPremium,
+                    memberShipType: userData[0].memberShipType,
+                    userId:userData[0].userId ,
+                    town :userData[0].town,
+                    pincode : userData[0].pincode,
+                    dob : userData[0].dob
             });
             console.log("User:", user);
 

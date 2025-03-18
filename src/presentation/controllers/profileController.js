@@ -3,17 +3,21 @@
 
 
 class profileController{
-    constructor(forgotPassword,getUser,profileEditCase,profileViewCase){
+    constructor(forgotPassword,getUser,profileEditCase,profileViewCase,newPhotoUpload,deletePhotoCase){
                 
       this.forgotPassword =forgotPassword;
       this.getUser = getUser;
       this.profileEditCase=profileEditCase;
       this.profileViewCase = profileViewCase
+      this.newPhotoUpload = newPhotoUpload
+      this.deletePhotoCase = deletePhotoCase
 
       this.handleForgotPassword = this.handleForgotPassword.bind(this);  
       this.handleGetUser = this.handleGetUser.bind(this);
       this.handleProfileEdit = this.handleProfileEdit.bind(this);
       this.handleProfileView = this.handleProfileView.bind(this);
+      this.handlenewPhotoUpload = this.handlenewPhotoUpload.bind(this);
+      this.handleDeletePhoto = this.handleDeletePhoto.bind(this);
 
     }
 
@@ -59,6 +63,38 @@ class profileController{
           next(err)
         }
     }    
+
+
+
+    async handlenewPhotoUpload(req,res,next){
+      try{
+        console.log("hello");
+        console.log(req.files);
+        const photoUrl = await this.newPhotoUpload.execute(req.files)
+        
+        res.send(photoUrl)
+        
+      }catch(err){
+       next(err)
+      }
+    }
+
+    async handleDeletePhoto(req, res, next) {
+      try {
+          const { userId } = req.user;
+          const { photoUrl } = req.params;
+  
+          const decodedPhotoUrl = decodeURIComponent(photoUrl);
+          const response = await this.deletePhotoCase.execute(userId, decodedPhotoUrl);
+  
+          res.status(200).json({ success: true, data: response });
+      } catch (err) {
+          console.error("Error in handleDeletePhoto:", err);
+          next(err);
+      }
+  }
+
+
 }
 
 module.exports= profileController

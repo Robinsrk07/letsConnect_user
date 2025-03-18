@@ -14,19 +14,18 @@ class UserCreatedCase{
                 }
                 const userData= Userdata.data
                 const user = new User({
-                    firstName: userData.firstName,
-                    lastName: userData.lastName,
+                    name: userData.name,
                     emailId: userData.emailId,
                     photoUrl: userData.photoUrl,
-                    skills: userData.skills,
-                    age: userData.age,
                     about: userData.about,
                     password:userData.password,
                     gender: userData.gender,
                     isPremium: userData.isPremium,
                     memberShipType: userData.memberShipType,
-                    userId:userData.userId 
-
+                    userId:userData.userId ,
+                    town :userData.town,
+                    pincode : userData.pincode,
+                    dob : userData.dob
                 });
                 const savedUser = await this.userRepository.save(user)
                 return savedUser; 

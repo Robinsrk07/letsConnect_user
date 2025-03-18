@@ -10,6 +10,9 @@ class profileEditCase{
     }
 
      async execute(userId,req){
+
+        console.log("data for edit",req);
+        
         
         const user = await this.userRepository.find(userId)
        

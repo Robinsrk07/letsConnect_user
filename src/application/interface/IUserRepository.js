@@ -23,6 +23,10 @@ class IUserRepository{
         throw new Error("Method not implemented")
 
     }
+    findOneAndDeletePhoto(){
+        throw new Error("Method not implemented")
+
+    }
 }
 
 module.exports = IUserRepository

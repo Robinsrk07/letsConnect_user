@@ -92,6 +92,24 @@ class UserRepository extends IUserRepository {
     }
 
 
+    async findOneAndDeletePhoto(userId, photoUrl) {
+        try {
+            const updatedUser = await UserModel.findOneAndUpdate(
+                { userId },
+                { $pull: { photoUrl: photoUrl } },
+                { new: true }
+            );
+    
+            if (!updatedUser) {
+                throw new Error("User not found or photo not present.");
+            }
+    
+            return updatedUser;
+        } catch (error) {
+            console.error("Error deleting photo from MongoDB:", error);
+            throw error;
+        }
+    }
 
 
 

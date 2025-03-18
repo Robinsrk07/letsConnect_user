@@ -53,13 +53,10 @@ class ConnectionRepository extends IConnectionRequest{
                         },
                         {
                             $project: {
-                                firstName: 1,
-                                lastName: 1,
-                                age: 1,
+                                name: 1,
                                 photoUrl: 1,
                                 about: 1,
                                 emailId: 1,
-                                skills: 1
                             }
                         }
                     ],

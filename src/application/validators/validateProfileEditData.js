@@ -4,7 +4,7 @@ const {ValidationError} = require("../errors/customError")
 class validateProfileEditData {
     constructor(){
         //this.data = data,
-        this. allowedUpdates=["firstName","lastName","about","photoUrl","skills","age","userId","gender"]
+        this. allowedUpdates=["name","dob","about","photoUrl","pincode","town","userId","gender"]
     }
 
     validateReq(data) {

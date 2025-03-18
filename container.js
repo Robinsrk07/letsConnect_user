@@ -24,13 +24,17 @@ const UserRoutes= require("./src/presentation/routes/userRoutes")
 const RequestRoutes=require("./src/presentation/routes/requestRoutes")
 const GenericConsumer = require('./src/infrastructure/RabitMq/consumer');
 const UserPaymentUpdate = require("./src/application/use_cases/createUser/userUpdate_Payment")
+const NewPhotoUpload  = require("./src/application/use_cases/profileUseCase/newPhotoUpload")
+const DeletePhotoCase = require("./src/application/use_cases/profileUseCase/deletePhoto")
 
 const authClient  = new AuthClient()
 const userRepository = new UserRepository()
 const emailService = new EmailService()
 const messageBroker = new MessageBroker()
+const newPhotoUpload =new NewPhotoUpload
 const connectionRepository= new ConnectionRepository(messageBroker)
 const userPaymentUpdate = new UserPaymentUpdate(userRepository)
+const deletePhotoCase = new DeletePhotoCase(userRepository)
 
 const userCreatedCase = new UserCreatedCase(userRepository)
 const newUserFormSignup = new GenericConsumer("user_created","user_queue",userCreatedCase)
@@ -57,7 +61,7 @@ const authMiddleware=new AuthMiddleware(authService)
 
 
 
-const profileController = new ProfileController(forgotPassword,getUser,profileEditCase,profileViewCase)
+const profileController = new ProfileController(forgotPassword,getUser,profileEditCase,profileViewCase,newPhotoUpload,deletePhotoCase)
 const requestController =new RequestController(reviewConnection,sendConnection)
 const userController =new UserController(allConnections,getFeedCase,requestRecieved)
 
